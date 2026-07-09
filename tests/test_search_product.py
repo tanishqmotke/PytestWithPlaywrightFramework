@@ -34,3 +34,4 @@ def test_search_invalid_product_shows_no_results(page):
     searchresult = ResultPage(page)
     searchresult.verify_no_result_found()
     
+

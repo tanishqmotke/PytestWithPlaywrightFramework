@@ -19,7 +19,7 @@ class ResultPage:
             title = title_locator.text_content()
             assert keyword.lower() in title.lower(), f"Title does not contain '{keyword}' : {title}"
     
-    
+    #AMZ-TC02
     def verify_no_result_found(self):
         expect(self.no_result_found).to_be_visible()
         assert self.all_search_result.count() == 0, f"Expected no product cards to render, but found {self.all_search_result.count()}"
