@@ -1,17 +1,20 @@
+from playwright.sync_api import expect
 class ResultPage:
 
     def __init__(self,page):
         self.page = page
         self.all_search_result = page.locator(".puisg-col-inner")
         
-    def verify_the_result(self,product_name):
-        self.page.wait_for_load_state("networkidle")
+    def verify_the_result(self,product_name,keyword):
+        expect(self.all_search_result.first).to_be_visible()
         
         titles = self.all_search_result.locator("h2 span")
-        for i in range(titles.count()):
-            title = titles.nth(i).text_content()
-            if product_name.lower() in title.lower():
-                print(f"Found: {title}")
-            else:
-                print(f"This title doesn't have the product name: {title}")
-        print("End of the script")
+        count = titles.count()
+        assert count>=1
+        keyword = "mouse"
+        for i in range(count):
+            title_locator = titles.nth(i)
+            if not title_locator.is_visible():
+                continue
+            title = title_locator.text_content()
+            assert keyword in title.lower(), f"Title does not contain '{keyword}' : {title}"

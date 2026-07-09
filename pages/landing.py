@@ -7,7 +7,8 @@ class LandingPage:
         self.search_button = self.page.locator(".nav-search-submit")
 
     def search_for_product(self,product_name):
-        self.accept_cookies.click()
+        if self.accept_cookies.is_visible():
+            self.accept_cookies.click()
         self.search_product.fill(product_name)
         self.search_button.click()
         
