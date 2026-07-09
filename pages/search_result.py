@@ -4,10 +4,11 @@ class ResultPage:
     def __init__(self,page):
         self.page = page
         self.all_search_result = page.locator(".puisg-col-inner")
-        
+        self.no_result_found = page.get_by_text("No results for your search query.")
+    
+    #AMZ-TC01
     def verify_the_result(self,keyword):
         expect(self.all_search_result.first).to_be_visible()
-        
         titles = self.all_search_result.locator("h2 span")
         count = titles.count()
         assert count>=1
@@ -17,3 +18,8 @@ class ResultPage:
                 continue
             title = title_locator.text_content()
             assert keyword.lower() in title.lower(), f"Title does not contain '{keyword}' : {title}"
+    
+    
+    def verify_no_result_found(self):
+        expect(self.no_result_found).to_be_visible()
+        assert self.all_search_result.count() == 0, f"Expected no product cards to render, but found {self.all_search_result.count()}"

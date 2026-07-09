@@ -1,4 +1,5 @@
 {
     "product_name" : "Wireless Mouse",
-     "keyword" : "Mouse"
+     "keyword" : "Mouse",
+     "invalid_product_name" : "zzxxqq123nonsense"
 }
