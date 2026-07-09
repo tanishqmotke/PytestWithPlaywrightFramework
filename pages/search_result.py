@@ -5,16 +5,15 @@ class ResultPage:
         self.page = page
         self.all_search_result = page.locator(".puisg-col-inner")
         
-    def verify_the_result(self,product_name,keyword):
+    def verify_the_result(self,keyword):
         expect(self.all_search_result.first).to_be_visible()
         
         titles = self.all_search_result.locator("h2 span")
         count = titles.count()
         assert count>=1
-        keyword = "mouse"
         for i in range(count):
             title_locator = titles.nth(i)
             if not title_locator.is_visible():
                 continue
             title = title_locator.text_content()
-            assert keyword in title.lower(), f"Title does not contain '{keyword}' : {title}"
+            assert keyword.lower() in title.lower(), f"Title does not contain '{keyword}' : {title}"

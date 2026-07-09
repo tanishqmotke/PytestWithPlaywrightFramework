@@ -9,12 +9,13 @@ from utils.data_helper import data_convert
 filepath = "data/data.json"
 data = data_convert(filepath)
 product_name = data["product_name"]
+keyword = data["keyword"]
 
 def test_search_for_product(page):
     page.goto("/")
     landingpage = LandingPage(page)
     landingpage.search_for_product(product_name)
     searchresult = ResultPage(page)
-    searchresult.verify_the_result(product_name)
+    searchresult.verify_the_result(keyword)
     
     
